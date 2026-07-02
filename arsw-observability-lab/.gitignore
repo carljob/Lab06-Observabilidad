@@ -1,0 +1,10 @@
+﻿# IntelliJ
+.idea/
+*.iml
+
+# Maven
+app/demoobservability-demo/target/
+
+# OS
+.DS_Store
+Thumbs.db
