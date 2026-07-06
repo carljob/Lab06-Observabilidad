@@ -9,10 +9,11 @@ clients:
   - url: http://loki:3100/loki/api/v1/push
 
 scrape_configs:
-  - job_name: docker-logs
+  - job_name: arsw-app
     static_configs:
       - targets:
           - localhost
         labels:
-          job: docker
-          __path__: /var/log/*.log
+          job: arsw-app
+          container: arsw-app
+          __path__: /var/log/containers/*.log
