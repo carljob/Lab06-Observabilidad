@@ -10,10 +10,15 @@ clients:
 
 scrape_configs:
   - job_name: arsw-app
-    static_configs:
-      - targets:
-          - localhost
-        labels:
-          job: arsw-app
-          container: arsw-app
-          __path__: /var/log/containers/*.log
+    docker_sd_configs:
+      - host: tcp://host.docker.internal:2375
+        refresh_interval: 5s
+    relabel_configs:
+      - source_labels: ['__meta_docker_container_name']
+        regex: '/arsw-app'
+        action: keep
+      - source_labels: ['__meta_docker_container_name']
+        target_label: container
+      - source_labels: ['__meta_docker_container_name']
+        target_label: job
+        replacement: arsw-app
